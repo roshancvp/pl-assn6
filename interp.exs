@@ -69,7 +69,9 @@ defmodule Main do
   def interp(e, env) do
     case e.__struct__ do
       NumC -> e.n
-      IdC -> env[e.s]
+      IdC ->
+        IO.puts(Kernel.inspect(e))
+        env[e.s]
       IfC ->
         result = interp(e.cond, env)
         if !is_boolean(result) do
@@ -84,9 +86,10 @@ defmodule Main do
       LamC -> %CloV{args: e.args, body: e.body, env: env}
       AppC ->
         argvals = Enum.map(e.args, fn arg -> interp(arg, env) end)
-        IO.puts(interp(e.fun, env))
         case interp(e.fun, env) do
-          PrimV -> e.op(argvals[0], argvals[1])
+          PrimV ->
+            IO.puts("HELLO")
+            e.op(argvals[0], argvals[1])
           CloV ->
             newEnv = helper(e.env, e.args, e.env)
             interp(e.body, newEnv)
@@ -101,15 +104,13 @@ defmodule Main do
       :true => true,
       :false => false,
       :+ => %PrimV{op: fn (x,y) -> x+y end}
-      :- => %PrimV{op: fn (x,y) -> x+y end}
-      :* => %PrimV{op: fn (x,y) -> x+y end}
-      :/ => %PrimV{op: fn (x,y) -> x+y end}
     }
 
     assert(interp(%NumC{n: 2}, %{}), 2)
     assert(interp(%IdC{s: :x}, %{:x => 5}), 5)
     assert(interp(%LamC{args: [%NumC{n: 1}], body: %AppC{}}, %{:x => 5}),
     %CloV{args: [%NumC{n: 1}], body: %AppC{}, env: %{:x => 5}})
+    assert(interp(%AppC{fun: %IdC{s: :+}, args: [%NumC{n: 1}, %NumC{n: 2}]}, topEnv), 2)
   end
 
   def assert(v1, v2) do
