@@ -31,30 +31,8 @@ defmodule Main do
   end
 
   defmodule PrimV do
-    # types: <function>,
+    # types: <function>
     defstruct op: nil
-    # def add(x, y) do
-    #    fn (x, y) -> x + y end
-    # end
-    # def sub(x, y) do
-    #   fn (x, y) -> x - y end
-    # end
-    # def mult(x, y) do
-    #   fn (x, y) -> x * y end
-    # end
-    # def divide(x,y) do
-    #    if y === 0 do
-    #       raise "ZHRL: can't divide by zero"
-    #    else
-    #       div
-    #    end
-    # end
-    # def lessthen_eq?(x, y) do
-    #   fn (x, y) -> x <= y end
-    # end
-    # def eql?(x, y do
-    #   fn (x, y) -> x == y end
-    # end
   end
 
   def helper(env, fdArgs, appcArgs) do
