@@ -95,8 +95,6 @@ defmodule Main do
             interp(e.body, newEnv)
           _ -> raise "ZHRL: Invalid application syntax"
         end
-      _ ->
-        "Didn't Match"
     end
   end
   def test() do
