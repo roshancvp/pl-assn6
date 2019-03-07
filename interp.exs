@@ -70,7 +70,6 @@ defmodule Main do
     case e.__struct__ do
       NumC -> e.n
       IdC ->
-        IO.puts(Kernel.inspect(e))
         env[e.s]
       IfC ->
         result = interp(e.cond, env)
