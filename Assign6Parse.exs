@@ -1,7 +1,10 @@
 
 defmodule Main do
     def desugar() do
-        "Not implemented yet..."
+        # extracts variable IDs and values
+        # creates a function application
+        #Appc{fun: %LamC{args: [ids...], body: parse(List.last(exp))},
+        #     args: [vals...]}
     end
     
     def parse(exp) do
