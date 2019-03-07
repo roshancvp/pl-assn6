@@ -88,7 +88,6 @@ defmodule Main do
         argvals = Enum.map(e.args, fn arg -> interp(arg, env) end)
         case interp(e.fun, env) do
           PrimV ->
-            IO.puts("HELLO")
             e.op(argvals[0], argvals[1])
           CloV ->
             newEnv = helper(e.env, e.args, e.env)
